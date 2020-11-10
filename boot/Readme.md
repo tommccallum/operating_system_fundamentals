@@ -58,7 +58,7 @@ qemu-system-x86_64 helloworld1.bin
 
 Note the addition of the -Ttext 0x7c00, the BIOS will load our code (the MASTER BOOT RECORD or MBR) at position 0x7C00 so we make that the starting address.  The magic value of 0x7C00 is part of the BIOS specification.  Try removing this and seeing what the error is...
 
-0x7C00 in decimal is 31744, which is 2^15 - 1024 (1KB). Our program is going to be in the first 512 bytes. 7FFF is the largest signed integer in 16 bits.  The program stack and the data area of the boot program is free to to use the memmory up to 0x7FFF.  Below this is the read only code from the BIOS for handling interrupts and other BIOS data.[3]
+0x7C00 in decimal is 31744, which is 2^15 - 1024 (1KB). Our program is going to be in the first 512 bytes. 7FFF is the largest signed integer in 16 bits.  The program stack and the data area of the boot program is free to to use the memmory up to 0x7FFF.  Below this is the read only code from the BIOS for handling interrupts and other BIOS data. Above this the are more BIOS data and video memory [2,3]
 
 Helloworld1.asm will print a H as there is no loop to load the rest of the string.  In Helloworld2 we fix that.
 
@@ -67,6 +67,8 @@ as -o helloworld2.o helloworld2.asm
 ld -o helloworld2.bin --oformat binary -Ttext 0x7c00 -e _start helloworld2.o
 qemu-system-x86_64 helloworld2.bin
 ```
+
+
 
 ## References
 
