@@ -12,7 +12,7 @@ _start:
   call print_string 
   hlt # stop execution 
 
-.include "print_string.asm"
+.include "print_string.s"
 
 msg: .asciz "Hello world!"      # stores the string (plus a byte with value "0") and gives us access via $msg
 

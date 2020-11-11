@@ -26,7 +26,7 @@ hltloop:
   hlt                   # stop execution 
   jmp hltloop           # put into infinite loop to stop stray external interrupts from firing and adding extra output
 
-.include "print_string.asm"
+.include "print_string.s"
 
 # fill the rest of the file up to 510 bytes with null bytes '\0'.
 .fill 510-(.-_start), 1, 0 # add zeroes to make it 510 bytes long

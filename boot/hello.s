@@ -6,7 +6,7 @@
 .global _start 
 
 _start:
-  # This follows the GNU convention of INSTRUCTION SOURCE, DESTINATION
+  # This follows the AT&T/GNU convention of INSTRUCTION SOURCE, DESTINATION
   # this is as compared with INTEL convention e.g. nasm that is INSTRUCTION DESTINATION, SOURCE
   mov $0x0E48, %ax  # sets register AH to 0xE (function teletype) and register AL to 0x48 (ASCII "H") 
   int $0x10         # call the function in ah from interrupt 0x10 

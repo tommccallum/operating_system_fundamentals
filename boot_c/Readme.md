@@ -3,15 +3,21 @@
 ## print_string
 
 ```
-as -o print_exe.o print_exe.asm
+as -o print_exe.o print_exe.s
 ld -o print_exe.bin --oformat binary -Ttext 0x7c00 -e _start print_exe.o
 qemu-system-x86_64 print_exe.bin
 ```
 
 ```
-as -o print_hex.o print_hex.asm
+as -o print_hex.o print_hex.s
 ld -o print_hex.bin --oformat binary -Ttext 0x7c00 -e _start print_hex.o
 qemu-system-x86_64 print_hex.bin
+```
+
+```
+as -o data_segment.o data_segment.s
+ld -o data_segment.bin --oformat binary -Ttext 0x0000 -e _start data_segment.o
+qemu-system-x86_64 data_segment.bin
 ```
 
 # Moving to C
