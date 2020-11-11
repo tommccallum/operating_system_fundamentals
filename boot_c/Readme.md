@@ -20,6 +20,12 @@ ld -o data_segment.bin --oformat binary -Ttext 0x0000 -e _start data_segment.o
 qemu-system-x86_64 data_segment.bin
 ```
 
+```
+as -o read_disk.o read_disk.s
+ld -o read_disk.bin --oformat binary -Ttext 0x7c00 -e _start read_disk.o
+qemu-system-x86_64 read_disk.bin
+```
+
 # Moving to C
 
 You can only get so far in assembler before it feels like you need a more powerful language to build on.  While it is possible to continue in assember we are now going to move to a basic C boot loader.
