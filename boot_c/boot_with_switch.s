@@ -41,7 +41,7 @@ load_kernel:
   call print_string
 
   mov $KERNEL_OFFSET, %bx           # where to place the read sectors
-  mov $8, %dh                      # read first 15 sectors
+  mov $8, %dh                       # read first 15 sectors
   mov BOOT_DRIVE, %dl               # from the boot disk
   call disk_load
   ret
