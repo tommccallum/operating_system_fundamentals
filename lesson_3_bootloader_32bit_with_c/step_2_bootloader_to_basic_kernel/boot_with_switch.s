@@ -60,7 +60,7 @@ halt_os_32:
 
 MSG_REAL_MODE:      .asciz "Started in real mode"
 MSG_PROTECTED_MODE: .asciz "Welcome to protected mode"
-MSG_LOAD_KERNEL:    .asciz "Loading image"
+MSG_LOAD_KERNEL:    .asciz "Loading os image"
 BOOT_DRIVE:         .byte  0x80
 
 # fill the rest of the file up to 510 bytes with null bytes '\0'.

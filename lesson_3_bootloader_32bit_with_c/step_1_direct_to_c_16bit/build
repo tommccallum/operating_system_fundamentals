@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+echo "Build 16-bit jump to C code"
+gcc -c -g -Os -march=x86-64 -ffreestanding -Wall -Werror boot.c -o boot.o
+ld -static -Tboot.ld -nostdlib --nmagic -o boot.elf boot.o
+objcopy -O binary boot.elf boot.bin
+qemu-system-x86_64 boot.bin
+
+
