@@ -8,6 +8,8 @@
 
 ## Compilation
 
+## Step 1
+
 If we compile using the normal method then we get a file that is larger than 512 bytes.
 
 ```
@@ -30,6 +32,8 @@ You can run the boot.bin file by typing:
 qemu-system-x86_64 boot.bin
 ```
 
+## Step 2
+
 You can do the same thing with our broken_boot.s example.
 
 ```
@@ -38,7 +42,9 @@ ld -o broken_boot.bin --oformat binary -e _start broken_boot.o
 qemu-system-x86_64 broken_boot.bin
 ```
 
-The broken boot will continue to look for bootable drives, where as the working boot loader succeeds.
+The broken boot will continue to look for bootable drives, in step 3 the working boot loader succeeds.
+
+## Step 3
 
 Now try hello.s:
 
@@ -47,6 +53,8 @@ as -o hello.o hello.s
 ld -o hello.bin --oformat binary -e _start hello.o
 qemu-system-x86_64 hello.bin
 ```
+
+## Step 4
 
 Then try:
 
@@ -61,6 +69,8 @@ Note the addition of the -Ttext 0x7c00, the BIOS will load our code (the MASTER 
 0x7C00 in decimal is 31744, which is 2^15 - 1024 (1KB). Our program is going to be in the first 512 bytes. 7FFF is the largest signed integer in 16 bits.  The program stack and the data area of the boot program is free to to use the memmory up to 0x7FFF.  Below this is the read only code from the BIOS for handling interrupts and other BIOS data. Above this the are more BIOS data and video memory [2,3]
 
 Helloworld1.s will print a H as there is no loop to load the rest of the string.  In Helloworld2 we fix that.
+
+## Step 5
 
 ```
 as -o helloworld2.o helloworld2.s
