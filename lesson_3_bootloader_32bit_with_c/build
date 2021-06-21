@@ -1,9 +1,9 @@
 #!/bin/bash
 
-C_ARCH="32"
-LD_ARCH="elf_i386"
-KERNEL_ADDRESS="0x1000"
-KERNEL_IMAGE="os-image"
+C_ARCH="32"                     # generate 32-bit x86 code
+LD_ARCH="elf_i386"              # generate a i386 compatible ELF program file
+KERNEL_ADDRESS="0x1000"         # where to load our kernel
+KERNEL_IMAGE="os-image"         # what our kernel image will be called
 
 echo "Building 32-bit kernel image"
 
