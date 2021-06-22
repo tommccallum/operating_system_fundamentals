@@ -13,23 +13,23 @@
 # Print char function
 # expects the value in al
 print_string_32:
-    pusha                       # save all registers to stack
-    mov $VIDEO_MEMORY, %edx     # write video memory location to memory
+    pusha                               # save all registers to stack
+    mov $VIDEO_MEMORY, %edx             # write video memory location to memory
 
 print_string_32_loop:
-    mov (%ebx), %al                    # write letter
-    mov $WHITE_ON_BLACK, %ah        # write attribute
+    mov (%ebx), %al                     # write letter
+    mov $WHITE_ON_BLACK, %ah            # write attribute
     
     cmp $0, %al
     je print_string_32_complete
 
     mov %ax, (%edx)
-    add $1, %ebx                # increment egbx to the next char in string
-    add $2, %edx                # move to next character cell in video memory
+    add $1, %ebx                        # increment egbx to the next char in string
+    add $2, %edx                        # move to next character cell in video memory
 
-    jmp  print_string_32_loop            # if not zero then loop
+    jmp  print_string_32_loop           # if not zero then loop
 
 print_string_32_complete:
-    popa                        # restore all registers from stack
+    popa                                # restore all registers from stack
     ret
 

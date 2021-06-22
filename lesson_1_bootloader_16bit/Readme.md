@@ -78,10 +78,55 @@ ld -o helloworld2.bin --oformat binary -Ttext 0x7c00 -e _start helloworld2.o
 qemu-system-x86_64 helloworld2.bin
 ```
 
+## Step 6
 
+### Method 1 using QEMU and GDB together
+
+In one terminal start the QEMU process.  The -S makes it wait until the gdb starts it and the -s makes it open a debug port on 1234.
+```
+qemu-system-x86_64 -s -S helloworld2.bin
+```
+
+In another window start the gdb process as follows:
+```
+$ gdb
+(gdb) target remote localhost:1234
+(gdb) set architecture i8086
+(gdb) break *0x7c00
+# to disassemble the current instruction
+(gdb) x
+# use si to step 1 instruction at a time
+# continue to end of program
+(gdb) c
+```
+
+### Method 2 using BOCHS
+
+```
+dnf -y install bochs bochs-debugger
+```
+
+Each output line looks like this:
+```
+(0) [0x0000fffffff0] f000:fff0 (unk. ctxt): jmpf 0xf000:e05b          ; ea5be000f0
+```
+
+* (0) is the line number
+* 0x0000fffffff0 is the 64-bit memory address
+* f000:fff0 is the value of CS - Code Segment register - (0xf000) and IP - Instruction Pointer register - (0xfff0)
+* (unk. ctxt)
+* jmpf is the instruction, in this case a far jump
+* 0xf000:e05b is the argument to the far jump
+* ea5be000f0 is the hex machine code (ea is a far jump), you read this in little endian style 5b,e0,00,F0 => e05b 00f0.  The code is 5 bytes (each byte is 2 hex digits).
+
+> IMPORTANT: If you find that the BOCHS machine keeps resetting over and over.  Try using the legacy BIOS rather than the latest.  This should solve your issue.
 
 ## References
 
 [1] https://medium.com/@g33konaut/writing-an-x86-hello-world-boot-loader-with-assembly-3e4c5bdd96cf
 [2] https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf
 [3] https://www.glamenv-septzen.net/en/view/6
+[4] https://www.cs.princeton.edu/courses/archive/fall06/cos318/precepts/bochs_tutorial.html
+[5] https://bochs.sourceforge.io/
+[6] https://bochs.sourceforge.io/cgi-bin/topper.pl?name=New+Bochs+Documentation&url=https://bochs.sourceforge.io/doc/docbook/user/index.html
+[7] https://www.cs.utexas.edu/~lorenzo/corsi/cs372h/07S/labs/lab1/lab1.html

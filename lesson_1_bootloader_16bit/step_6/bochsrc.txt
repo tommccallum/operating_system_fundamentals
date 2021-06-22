@@ -1,0 +1,9 @@
+megs: 32
+romimage: file=$BXSHARE/BIOS-bochs-legacy
+vgaromimage: file=$BXSHARE/VGABIOS-lgpl-latest
+vga: extension=vbe, update_freq=15
+floppya: 1_44=floppy.img, status=inserted
+boot: floppy
+log: bochs.log
+mouse: enabled=0
+cpu: ips=15000000

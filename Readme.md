@@ -10,6 +10,13 @@ Initially following the document at https://www.cs.bham.ac.uk/~exr/lectures/opsy
 * /boot_protected_mode      has more examples and has a version that can switch from real mode into protected mode
 * /boot_c   has a simple C kernel that has been joined with a assembler boot loader
 
+## Debugging with Bochs
+
+Before running bochs you will need to have the BXSHARE set to the directory where the Bochs images are stored.
+
+```
+source bochs.env
+```
 
 ## Long term plan for bootloader
 
