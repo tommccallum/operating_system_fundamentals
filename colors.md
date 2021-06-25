@@ -1,5 +1,7 @@
 # 16-bit colors
 
+Source: [https://intermezzos.github.io/book/first-edition/hello-world.html](https://intermezzos.github.io/book/first-edition/hello-world.html)
+
 | Value | Color          |
 |-------|----------------|
 | 0x0   | black          |
@@ -18,3 +20,4 @@
 | 0xD   | bright magenta |
 | 0xE   | yellow         |
 | 0xF   | white          |
+
