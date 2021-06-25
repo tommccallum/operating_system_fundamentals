@@ -3,7 +3,7 @@
 C_ARCH="32"                     # generate 32-bit x86 code
 LD_ARCH="elf_i386"              # generate a i386 compatible ELF program file
 KERNEL_ADDRESS="0x1000"         # where to load our kernel
-KERNEL_IMAGE="os-image"         # what our kernel image will be called
+KERNEL_IMAGE="os.img"         # what our kernel image will be called
 
 echo "Building 32-bit kernel image"
 
@@ -12,6 +12,9 @@ ld -m$LD_ARCH -o kernel_main.bin -Ttext ${KERNEL_ADDRESS} -e main --oformat bina
 as -o boot_with_switch.o boot_with_switch.s
 ld -o boot_with_switch.bin --oformat binary -Ttext 0x7c00 -e _start boot_with_switch.o
 cat boot_with_switch.bin kernel_main.bin > $KERNEL_IMAGE
+
+dd if=/dev/zero of=floppy.img bs=1024 count=1024
+dd if=$KERNEL_IMAGE of=floppy.img conv=notrunc
 
 echo "Kernel Image: ${KERNEL_IMAGE}"
 qemu-system-x86_64 $KERNEL_IMAGE

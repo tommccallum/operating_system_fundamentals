@@ -32,4 +32,6 @@
 *.app
 *.bin
 *.elf
-os-image
+*.img
+*.iso
+*.log

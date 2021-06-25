@@ -1,3 +1,5 @@
+.section .rodata
+
 gdt64:
 gdt64_null:
   .word 0x0000

@@ -7,32 +7,29 @@
 .global _start 
 
 _start:
-  jmp HERE
-
-# we had to put this file here so that GAS would pick up the CODE_SEG
-.include "gdt64.s"  # <<-- why this does not work is beyond me!
-
-.code16
-HERE:
   mov $0x9000, %bp                      # set the stack
   mov %bp, %sp
   .include "enable_a20_gate.s"
 
   call detect_cpuid
   call detect_long_mode
-  
+  call setup_long_mode
+
+  # we had to put this file here so that GAS would pick up the CODE_SEG
+  .include "gdt64.s"  # <<-- why this does not work is beyond me!
+
+
+setup_long_mode:
+  call clear_paging_table_memory
   call setup_paging_tables 
+  cli
+  lgdt gdt64ptr                  # load the 64-bit global descriptor table
 
-  lgdt GDT64_pointer                  # load the 64-bit global descriptor table
-
-  jmp $CODE_SEG, $BEGIN_LONG_MODE        # <<-- says this is not set but should be as it works in our 32-bit version
+  jmp $CODE_SEG64, $BEGIN_LONG_MODE        # <<-- says this is not set but should be as it works in our 32-bit version
   
-  mov $65, %al 
-  call print_char16
-
-  mov $65, %al 
-  call error16 
-
+finale:
+  hlt
+  call finale
 
 .include "print_char_16bit.s"
 // .include "print_char_64bit.s"
@@ -40,6 +37,7 @@ HERE:
 .include "print_err_64bit.s"
 .include "detect_cpuid.s"
 .include "detect_long_mode.s"
+.include "clear_paging_memory.s"
 .include "setup_paging_tables.s"
 .include "long_mode.s"
 

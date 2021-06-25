@@ -1,7 +1,7 @@
 .code64
 
 BEGIN_LONG_MODE:
-  mov $DATA_SEG, %ax          # start to write our new segments to registers
+  mov $DATA_SEG64, %ax          # start to write our new segments to registers
   mov %ax, %ds
   mov %ax, %es
   mov %ax, %fs
@@ -17,7 +17,4 @@ BEGIN_LONG_MODE:
   mov $0xb8000, %eax
   mov $0x2f4b2f4f, %ebx
   mov %ebx, (%eax)
-OK:
-  hlt
-  call OK
-
+  call finale

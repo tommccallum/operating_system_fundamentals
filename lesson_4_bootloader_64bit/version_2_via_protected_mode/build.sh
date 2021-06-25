@@ -3,7 +3,7 @@
 C_ARCH="64"                         # generate 64-bit x86 code
 LD_ARCH="elf_x86_64"              # generate a i386 compatible ELF program file
 KERNEL_ADDRESS="0x1000"             # where to load our kernel
-KERNEL_IMAGE="os-image-64"          # what our kernel image will be called
+KERNEL_IMAGE="os-image-64.img"          # what our kernel image will be called
 
 echo "Building 64-bit kernel image"
 

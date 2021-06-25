@@ -12,3 +12,20 @@ Load CR3 with a valid PML4 table.
 Enable paging.
 At this point you will be in compatibility mode. A far jump may be executed to switch to long mode. However, the offset must not exceed 32-bit
 ```
+
+## Run in VirtualBox
+
+* Create a new machine with 32MB memory and no hard disk.
+* Add a ISO I82078 floppy drive under ```Settings > Storage```
+
+![Add floppy device](VirtualBox_AddFloppyDevice.png) 
+
+* Click on add Floppy Disk Selector and click the Add button
+
+![Add floppy image](VirtualBox_ClickOnAddFloppyDrive.png) 
+
+* Select your img file
+
+![Floppy image selected](VirtualBox_FloppySelected.png) 
+
+* Start the machine.

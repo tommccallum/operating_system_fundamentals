@@ -1,4 +1,4 @@
-.code64
+.code16
 
 // PML4T[0] -> PDPT.
 // PDPT[0] -> PDT.
@@ -9,5 +9,5 @@ clear_paging_table_memory:
     mov %edi,%cr3         # Set control register 3 to the destination index.
     xor %eax, %eax        # Nullify the A-register.
     mov $4096,%ecx        # Set the C-register to 4096.
-    rep stosd           # Clear the memory.
+    rep stosl           # Clear the memory.
     mov %cr3,%edi         # Set the destination index to control register 3.

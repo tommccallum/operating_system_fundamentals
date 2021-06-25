@@ -100,6 +100,12 @@ $ gdb
 (gdb) c
 ```
 
+You might also want to capture the output using:
+
+```
+qemu-system-x86_64 -no-shutdown -no-reboot -d int boot.bin 2>&1 | tee -a boot.log
+```
+
 ### Method 2 using BOCHS
 
 ```
